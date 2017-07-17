@@ -1,0 +1,19 @@
+# Files and directories created by pub
+.pub/
+build/
+doc/
+.buildlog
+.packages
+.project
+
+# Directory created by dartdoc
+doc/api/
+
+# Generated files
+*.info.json      # Produced by the --dump-info flag.
+*.js_
+*.js.deps
+
+# IDE files
+.idea/
+*.out
