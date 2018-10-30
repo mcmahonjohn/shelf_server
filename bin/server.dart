@@ -7,13 +7,13 @@ import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_server/src/endpoints.dart';
 import 'package:shelf_static/shelf_static.dart';
 
-const String _default_url = '127.0.0.1';
-const String _default_port = "8082";
-const String webIndex = "index.html";
+const String defaultUrl = '127.0.0.1';
+const String defaultPort = '8082';
+const String webIndex = 'index.html';
 
 void main(List<String> args) {
   var parser = new ArgParser()
-    ..addOption('port', abbr: 'p', defaultsTo: _default_port);
+    ..addOption('port', abbr: 'p', defaultsTo: defaultPort);
 
   var result = parser.parse(args);
 
@@ -35,7 +35,7 @@ void _handleRequests(int port) {
       .addMiddleware(shelf.logRequests())
       .addHandler(indexHandler);
 
-  io.serve(handler, _default_url, port).then((server) {
+  io.serve(handler, defaultUrl, port).then((server) {
 
     // Enable content compression
     server.autoCompress = true;
@@ -55,8 +55,8 @@ Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
     RegExp endpointExp = new RegExp(url);
 
     if (endpointExp.hasMatch(request.url.path)) {
-      print("${url} contains ${request.url.path}");
-      finalResponse = new shelf.Response.ok("");
+      print('${url} contains ${request.url.path}');
+      finalResponse = new shelf.Response.ok('');
     }
   }
 
