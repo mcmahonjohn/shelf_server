@@ -17,7 +17,7 @@ void main(List<String> args) {
 
   var result = parser.parse(args);
 
-  var port = int.parse(result['port'], onError: (val) {
+  var port = int.parse(result['port'].toString(), onError: (val) {
     stdout.writeln('Could not parse port value "$val" into a number.');
     exit(1);
   });
@@ -25,7 +25,7 @@ void main(List<String> args) {
   _handleRequests(port);
 }
 
-void _handleRequests(port) {
+void _handleRequests(int port) {
   var indexHandler = createStaticHandler('build/web',
       defaultDocument: webIndex);
 
