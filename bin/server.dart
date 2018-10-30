@@ -49,13 +49,13 @@ void _handleRequests(int port) {
 /// Forward request to service unless to /logs
 Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
   print('Got request for ${request.url.path}');
-  shelf.Response finalResponse = null;
+  var finalResponse = new shelf.Response.internalServerError();
 
-  for (String url in endpoints.keys) {
-    RegExp endpointExp = new RegExp(url);
+  for (var url in endpoints.keys) {
+    var endpointExp = new RegExp(url);
 
     if (endpointExp.hasMatch(request.url.path)) {
-      print('${url} contains ${request.url.path}');
+      print('$url contains ${request.url.path}');
       finalResponse = new shelf.Response.ok('');
     }
   }
@@ -63,6 +63,6 @@ Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
   return finalResponse;
 }
 
-void logger(String msg, bool isError) {
+void logger(String msg, {bool isError}) {
 
 }
