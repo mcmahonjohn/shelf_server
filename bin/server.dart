@@ -8,21 +8,24 @@ import 'package:shelf_server/src/endpoints.dart';
 import 'package:shelf_static/shelf_static.dart';
 
 const String defaultUrl = '127.0.0.1';
-const String defaultPort = '8082';
+const String _defaultPort = '8082';
 const String webIndex = 'index.html';
 
 void main(List<String> args) {
   var parser = new ArgParser()
-    ..addOption('port', abbr: 'p', defaultsTo: defaultPort);
+    ..addOption('port', abbr: 'p', defaultsTo: _defaultPort);
 
   var result = parser.parse(args);
 
-  var port = int.parse(result['port'].toString(), onError: (val) {
-    stdout.writeln('Could not parse port value "$val" into a number.');
-    exit(1);
-  });
+  var port = int.tryParse(result['port'].toString()) ?? _reportBadPortInput(result['port']);
 
   _handleRequests(port);
+}
+
+/// Sends an error to the console and then returns the default port number.
+int _reportBadPortInput(dynamic badInput) {
+  stdout.writeln('Could not parse port value "$badInput" into a number.');
+  return int.tryParse(_defaultPort);
 }
 
 void _handleRequests(int port) {
