@@ -2,7 +2,6 @@ name: shelf_server
 description: A work-in-progress backend server using shelf
 version: 0.0.1
 homepage: https://github.com/mcmahonjohn/shelf_server
-author:
 
 environment:
   sdk: '>=1.24.2 <3.0.0'
