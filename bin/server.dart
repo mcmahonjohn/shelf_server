@@ -31,7 +31,7 @@ int _reportBadPortInput(dynamic badInput) {
 
 void _handleRequests(int port) {
   var indexHandler = createStaticHandler('build/web',
-      defaultDocument: webIndex);
+      defaultDocument: webIndex,);
 
   var handler = const shelf.Pipeline()
 //      .addMiddleware(shelf.createMiddleware(requestHandler: _endpointsHandler))//, errorHandler: _errorHandler))
