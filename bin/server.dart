@@ -5,6 +5,7 @@ import 'package:args/args.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_server/src/endpoints.dart';
+import 'package:shelf_server/src/logger.dart';
 import 'package:shelf_static/shelf_static.dart';
 
 const String defaultUrl = '127.0.0.1';
@@ -43,7 +44,7 @@ void _handleRequests(int port) {
     // Enable content compression
     server.autoCompress = true;
 
-    print('Serving at http://${server.address.host}:${server.port}');
+    logger('Serving at http://${server.address.host}:${server.port}');
   });
 
 }
@@ -51,21 +52,17 @@ void _handleRequests(int port) {
 /// Handles the logic for most requests
 /// Forward request to service unless to /logs
 Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
-  print('Got request for ${request.url.path}');
+  logger('Got request for ${request.url.path}');
   var finalResponse = new shelf.Response.internalServerError();
 
   for (var url in endpoints.keys) {
     var endpointExp = new RegExp(url);
 
     if (endpointExp.hasMatch(request.url.path)) {
-      print('$url contains ${request.url.path}');
+      logger('$url contains ${request.url.path}');
       finalResponse = new shelf.Response.ok('');
     }
   }
 
   return finalResponse;
-}
-
-void logger(String msg, {bool isError}) {
-
 }
