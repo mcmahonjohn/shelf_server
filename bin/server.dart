@@ -55,7 +55,7 @@ Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
   logger('Got request for ${request.url.path}');
   var finalResponse = shelf.Response.internalServerError();
 
-  for (var url in endpoints.keys) {
+  for (final url in endpoints.keys) {
     var endpointExp = RegExp(url);
 
     if (endpointExp.hasMatch(request.url.path)) {
