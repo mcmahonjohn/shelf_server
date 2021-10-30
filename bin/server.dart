@@ -13,7 +13,7 @@ const String _defaultPort = '8082';
 const String webIndex = 'index.html';
 
 void main(List<String> args) {
-  var parser = new ArgParser()
+  var parser = ArgParser()
     ..addOption('port', abbr: 'p', defaultsTo: _defaultPort);
 
   var result = parser.parse(args);
@@ -31,7 +31,7 @@ int _reportBadPortInput(dynamic badInput) {
 
 void _handleRequests(int port) {
   var indexHandler = createStaticHandler('build/web',
-      defaultDocument: webIndex);
+      defaultDocument: webIndex,);
 
   var handler = const shelf.Pipeline()
 //      .addMiddleware(shelf.createMiddleware(requestHandler: _endpointsHandler))//, errorHandler: _errorHandler))
@@ -53,14 +53,14 @@ void _handleRequests(int port) {
 /// Forward request to service unless to /logs
 Future<shelf.Response> _endpointsHandler(shelf.Request request) async {
   logger('Got request for ${request.url.path}');
-  var finalResponse = new shelf.Response.internalServerError();
+  var finalResponse = shelf.Response.internalServerError();
 
-  for (var url in endpoints.keys) {
-    var endpointExp = new RegExp(url);
+  for (final url in endpoints.keys) {
+    var endpointExp = RegExp(url);
 
     if (endpointExp.hasMatch(request.url.path)) {
       logger('$url contains ${request.url.path}');
-      finalResponse = new shelf.Response.ok('');
+      finalResponse = shelf.Response.ok('');
     }
   }
 
