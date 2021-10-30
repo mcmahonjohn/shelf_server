@@ -5,7 +5,7 @@ A ready to use server for any web content.
 ## Getting Started
 
 ### Dart
-* [Install Dart](https://www.dartlang.org/install/archive)  >= 1.24.2 
+* [Install Dart](https://www.dartlang.org/install/archive)  >= 2.14.0
 * Add the Dart SDK to your path.
 * From a new command window, type `dart --version` to verify that Dart is now available.
 
@@ -15,7 +15,7 @@ A ready to use server for any web content.
 ### Setting up Dart on your IDE
 * Set up the Dart SDK and Dartium by going in your IDE's settings and add the Dart SDK
 * Note: For HomeBrew Mac users the Dart SDK and Dartium locations are:
-  * SDK directory: `HOMEBREW_INSTALL/dart/1.24.2/libexec`
+  * SDK directory: `HOMEBREW_INSTALL/dart/2.14.0/libexec`
 
 ## Using shelf_server
 
